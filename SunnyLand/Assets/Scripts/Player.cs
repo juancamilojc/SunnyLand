@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
     private Rigidbody2D rb;
-
     [SerializeField] private float moveSpeed = 10;
     private float direction;
     private Vector3 initialPosition;
@@ -12,8 +11,11 @@ public class Player : MonoBehaviour {
 
     [SerializeField] private float jumpStrenght = 2;
     [SerializeField] private Transform feetPosition;
+    [SerializeField] private float overlapRadius;
     [SerializeField] private LayerMask ground;
     private bool onGround;
+
+    [SerializeField] private float downBoundary;
 
     [SerializeField] private Animator playerAnimator;
 
@@ -27,7 +29,8 @@ public class Player : MonoBehaviour {
     void Update() {
         Move();
 
-        if (transform.position.y < -7) {
+        // Reseta a posição do Player caso ele caia do mapa
+        if (transform.position.y < downBoundary) {
             ResetPosition();
         }
     }
@@ -35,7 +38,7 @@ public class Player : MonoBehaviour {
     private void Move() {
         // Movimentação Horizontal
         direction = Input.GetAxis("Horizontal");
-        onGround = Physics2D.OverlapCircle(feetPosition.position, 0.3f, ground);
+        onGround = Physics2D.OverlapCircle(feetPosition.position, overlapRadius, ground);
         rb.velocity = new Vector2(direction * moveSpeed, rb.velocity.y);
 
         // Faz o Player olhar para o lado do movimento
