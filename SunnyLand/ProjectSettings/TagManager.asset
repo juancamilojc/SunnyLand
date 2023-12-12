@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags: []
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - Ground
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 235480607
+    locked: 0
+  - name: Cave
+    uniqueID: 2620012015
+    locked: 0
+  - name: PropBG
+    uniqueID: 1178176183
+    locked: 0
+  - name: Character
+    uniqueID: 2283408273
+    locked: 0
+  - name: Prop
+    uniqueID: 1084724979
+    locked: 0
+  - name: Foreground
+    uniqueID: 1888547361
+    locked: 0
