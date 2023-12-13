@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Plataform
+  - MovingPlataform
   layers:
   - Default
   - TransparentFX
@@ -44,11 +46,11 @@ TagManager:
   - name: Background
     uniqueID: 235480607
     locked: 0
-  - name: Cave
-    uniqueID: 2620012015
-    locked: 0
   - name: PropBG
     uniqueID: 1178176183
+    locked: 0
+  - name: Cave
+    uniqueID: 2620012015
     locked: 0
   - name: Character
     uniqueID: 2283408273
