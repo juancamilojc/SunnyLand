@@ -1,63 +1,67 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
-    private Rigidbody2D rb;
-    [SerializeField] private float moveSpeed = 10;
-    private float direction;
+    [SerializeField] private float moveSpeed = 400f;
     private Vector3 initialPosition;
+    private float horizontalMove = 0;
     private bool facingRight = true;
+    private Rigidbody2D rb;
 
-    [SerializeField] private float jumpStrenght = 2;
-    [SerializeField] private Transform feetPosition;
+    private bool jump = false;
+    [SerializeField] private float jumpStrenght = 600f;
+    [SerializeField] private Transform groundCheck;
     [SerializeField] private float overlapRadius;
-    [SerializeField] private LayerMask ground;
+    [SerializeField] private LayerMask whatIsFloor;
     private bool onGround;
-
-    private Rigidbody2D plataform;
-
-    [SerializeField] private float downBoundary;
 
     [SerializeField] private Animator playerAnimator;
 
-    // Start is called before the first frame update
+    //[SerializeField] private float downBoundary = -7;
+
     void Start() {
         rb = GetComponent<Rigidbody2D>();
         initialPosition = transform.position;
     }
 
-    // Update is called once per frame
     void Update() {
-        Move();
-
-        // Reseta a posição do Player caso ele caia do mapa
-        if (transform.position.y < downBoundary) {
-            ResetPosition();
-        }
-    }
-
-    private void Move() {
-        // Movimentação Horizontal
-        direction = Input.GetAxis("Horizontal");
-        onGround = Physics2D.OverlapCircle(feetPosition.position, overlapRadius, ground);
-        rb.velocity = new Vector2(direction * moveSpeed, rb.velocity.y);
+        horizontalMove = Input.GetAxis("Horizontal");
 
         // Faz o Player olhar para o lado do movimento
-        if ((direction < 0 && facingRight) || (direction > 0 && !facingRight)) {
-            facingRight = !facingRight;
+        if ((horizontalMove < 0 && facingRight) || (horizontalMove > 0 && !facingRight)) {
             transform.Rotate(0f, 180f, 0f);
+            facingRight = !facingRight;
         }
 
+        onGround = Physics2D.OverlapCircle(groundCheck.position, overlapRadius, whatIsFloor);
+
+        if (Input.GetButtonDown("Jump")) {
+            jump = true;
+        }
+
+        // Reseta a posição do Player caso ele caia do mapa
+        /* if (transform.position.y < downBoundary) {
+            ResetPosition();
+        } */
+    }
+
+    void FixedUpdate() {
+        Move(horizontalMove, onGround, jump);
+        jump = false;
+    }
+
+    private void Move(float direction, bool ground, bool jump) {
+        // Movimentação Horizontal
+        rb.velocity = new Vector2(direction * moveSpeed * Time.fixedDeltaTime, rb.velocity.y);
+
         // Meânica de Pulo
-        if (onGround && Input.GetButtonDown("Jump")) {
-            rb.velocity = Vector2.up * jumpStrenght;
+        if (ground && jump) {
+            rb.velocity = jumpStrenght * Time.fixedDeltaTime * Vector2.up;
         }
 
         // Animações
         playerAnimator.SetFloat("speedX", Mathf.Abs(direction));    //  idle -> run
         playerAnimator.SetFloat("speedY", rb.velocity.y);           //  AnyState -> Jump || Fall
-        playerAnimator.SetBool("OnGround", onGround);               //  AnyState -> Jump || Fall
+        playerAnimator.SetBool("OnGround", ground);
     }
 
     private void ResetPosition() {
@@ -65,18 +69,8 @@ public class Player : MonoBehaviour {
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.gameObject.CompareTag("MovingPlataform")) {
-            transform.parent = collision.transform;
-            plataform = collision.gameObject.GetComponent<Rigidbody2D>();
-            rb.gravityScale = 10;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision) {
-        if (collision.gameObject.CompareTag("MovingPlataform")) {
-            transform.parent = null;
-            plataform = null;
-            rb.gravityScale = 3.0f;
+        if (collision.gameObject.CompareTag("Void")) {
+            ResetPosition();
         }
     }
 }

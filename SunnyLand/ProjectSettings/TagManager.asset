@@ -4,10 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Plataform
   - MovingPlataform
   - Gem
   - Cherry
+  - Void
   layers:
   - Default
   - TransparentFX
