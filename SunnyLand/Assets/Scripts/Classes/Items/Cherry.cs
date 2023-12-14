@@ -1,18 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-public class Cherry : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+public class Cherry : MonoBehaviour, ICollectible {
+    public static event Action OnCherryCollected;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void Collect() {
+        Debug.Log("Cereja Coletada!");
+        OnCherryCollected?.Invoke();
+        Destroy(gameObject);
     }
 }

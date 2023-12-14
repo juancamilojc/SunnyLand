@@ -1,18 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-public class Gem : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+public class Gem : MonoBehaviour, ICollectible {
+    public static event Action OnGemCollected;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void Collect() {
+        Debug.Log("Gema Coletada!");
+        OnGemCollected?.Invoke();
+        Destroy(gameObject);
     }
 }

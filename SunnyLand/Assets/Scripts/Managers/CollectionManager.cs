@@ -1,18 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
-public class CollectionManager : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+public class CollectionManager : MonoBehaviour {
+    [SerializeField] private TextMeshProUGUI gemUI;
+    private int numGemsCollected = 0;
+    [SerializeField] private TextMeshProUGUI cherryUI;
+    private int numCherrysCollected = 0;
+
+    private void OnEnable() {
+        Gem.OnGemCollected += GemCollected;
+        Cherry.OnCherryCollected += CherryCollected;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    private void OnDisable() {
+        Gem.OnGemCollected -= GemCollected;
+        Cherry.OnCherryCollected -= CherryCollected;
+    }
+
+    private void GemCollected() {
+        numGemsCollected++;
+        gemUI.text = numGemsCollected.ToString();
+    
+    }
+
+    private void CherryCollected() {
+        numCherrysCollected++;
+        cherryUI.text = numCherrysCollected.ToString();
     }
 }
