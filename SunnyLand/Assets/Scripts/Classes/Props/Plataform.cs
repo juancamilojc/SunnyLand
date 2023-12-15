@@ -26,16 +26,16 @@ public class Plataform : MonoBehaviour {
                 transform.position = new Vector2(transform.position.x - speed * Time.deltaTime, transform.position.y);
             }
         } else {
-            if (transform.position.y < pointA.position.y) {
+            if (transform.position.y > pointA.position.y) {
                 moveToB = true;
-            } else if (transform.position.y > pointB.position.y) {
+            } else if (transform.position.y < pointB.position.y) {
                 moveToB = false;
             }
 
             if (moveToB) {
-                transform.position = new Vector2(transform.position.y + speed * Time.deltaTime, transform.position.y);
+                transform.position = new Vector2(transform.position.x, transform.position.y - speed * Time.deltaTime);
             } else {
-                transform.position = new Vector2(transform.position.y - speed * Time.deltaTime, transform.position.y);
+                transform.position = new Vector2(transform.position.x, transform.position.y + speed * Time.deltaTime);
             }
         }
     }

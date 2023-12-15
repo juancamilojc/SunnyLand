@@ -16,8 +16,6 @@ public class Player : MonoBehaviour {
 
     [SerializeField] private Animator playerAnimator;
 
-    //[SerializeField] private float downBoundary = -7;
-
     void Start() {
         rb = GetComponent<Rigidbody2D>();
         initialPosition = transform.position;
@@ -37,11 +35,6 @@ public class Player : MonoBehaviour {
         if (Input.GetButtonDown("Jump")) {
             jump = true;
         }
-
-        // Reseta a posição do Player caso ele caia do mapa
-        /* if (transform.position.y < downBoundary) {
-            ResetPosition();
-        } */
     }
 
     void FixedUpdate() {
