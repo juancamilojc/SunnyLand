@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 374852512131257642}
   - component: {fileID: 6544702957888025142}
   - component: {fileID: 3279943810192696667}
+  - component: {fileID: 7054200097425481519}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -103,14 +104,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd3be7fb69fe4084bb21f79aaf7749d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 400
-  jumpStrenght: 600
-  groundCheck: {fileID: 7850168654566238772}
-  overlapRadius: 0.1
-  whatIsFloor:
+  moveSpeed: 4
+  jumpStrenght: 5.75
+  whatIsGround:
     serializedVersion: 2
-    m_Bits: 64
-  playerAnimator: {fileID: 374852512131257642}
+    m_Bits: 192
+  groundCheck: {fileID: 7850168654566238772}
+  overlapRadius: 0.15
 --- !u!50 &9035348421846988493
 Rigidbody2D:
   serializedVersion: 4
@@ -241,6 +241,21 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.01
+--- !u!114 &7054200097425481519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1683580786951231144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e1df3a778c92ce45b972ef162156a0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 5
+  _currentHealth: 3
+  healthUI: {fileID: 0}
 --- !u!1 &4103264067398005063
 GameObject:
   m_ObjectHideFlags: 0

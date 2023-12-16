@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2ddde1753640454429bcc706eb5a538c
+guid: a5b9ed701e6e94945b6ea043de191d97
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Rubik
+  - Press Start 2P
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
