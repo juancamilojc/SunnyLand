@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
-public class FireLightEffect : MonoBehaviour {
+public class FireLightFX : MonoBehaviour {
     private Light2D fireLight;
     [SerializeField] private float intensity = 1.0f;
     [SerializeField] private float randomIntensityRange = 0.25f;
@@ -16,6 +16,10 @@ public class FireLightEffect : MonoBehaviour {
     }
 
     void Update() {
+        FireFX();
+    }
+
+    private void FireFX() {
         float randomIntensity = Random.Range(-randomIntensityRange, randomIntensityRange);
         float ocillation = Mathf.Sin((Time.time + randomOffset) * speed);
         float newIntensity = originalIntensity + ocillation * intensity * randomIntensity;

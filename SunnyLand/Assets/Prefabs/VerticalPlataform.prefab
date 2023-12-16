@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 6333758032819348353}
   - component: {fileID: 2200504844575391202}
   - component: {fileID: 3767846221627198543}
-  - component: {fileID: 2891796979042815180}
+  - component: {fileID: 8587324951591848521}
   - component: {fileID: 1531654803505872127}
   m_Layer: 7
   m_Name: plataform
@@ -286,7 +286,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 5.25, y: 1}
   m_EdgeRadius: 0
---- !u!114 &2891796979042815180
+--- !u!114 &8587324951591848521
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -295,13 +295,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6848235486809631123}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 323fb73a438cda241abd8ff748058d36, type: 3}
+  m_Script: {fileID: 11500000, guid: 224f8459123cec748badef2f2686a6c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1.25
+  speed: 2
   pointA: {fileID: 5458549755044131784}
   pointB: {fileID: 4434823679404089833}
-  horizontal: 0
 --- !u!114 &1531654803505872127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -328,7 +327,7 @@ MonoBehaviour:
   - {x: 2.625, y: -0.49999905, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: -44036
+  m_InstanceId: 31680
   m_LocalBounds:
     m_Center: {x: 0.0000038146973, y: 0.00000047683716, z: 0}
     m_Extent: {x: 2.6249962, y: 0.49999952, z: 0}

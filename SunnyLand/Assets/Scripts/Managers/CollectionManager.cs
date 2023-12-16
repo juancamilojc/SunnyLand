@@ -8,10 +8,18 @@ public class CollectionManager : MonoBehaviour {
     [Header("Healing")]
     [SerializeField] private int amountToCure = 3;
     [SerializeField] private int amountHeal = 1;
-    [SerializeField] private HealthSystem playerHP;
-
+    
     private int numCherrysCollected = 0;
     private int numGemsCollected = 0;
+    private PlayerHP playerHP;
+
+    void Awake() {
+        playerHP = GameObject.FindWithTag("Player").GetComponent<PlayerHP>();
+
+        if (playerHP == null) {
+            Debug.Log("Erro ao carregar o HP do Player!");
+        }
+    }
 
     private void OnEnable() {
         Cherry.OnCherryCollected += CherryCollected;

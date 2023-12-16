@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Player : MonoBehaviour {
+public class PlayerController : MonoBehaviour {
     [SerializeField] private float moveSpeed = 4f;
     [SerializeField] private float jumpStrenght = 5.75f;
     [SerializeField] private LayerMask whatIsGround;
@@ -14,12 +14,12 @@ public class Player : MonoBehaviour {
     private float horizontalMove;
 
     private Animator playerAnimator;
-    private HealthSystem playerHP;
+    private PlayerHP playerHP;
 
     void Awake() {
         initialPosition = transform.position;
         playerAnimator = GetComponent<Animator>();
-        playerHP = GetComponent<HealthSystem>();
+        playerHP = GetComponent<PlayerHP>();
         rb = GetComponent<Rigidbody2D>();
     }
 

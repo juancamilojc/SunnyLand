@@ -1,13 +1,9 @@
 using UnityEngine;
 
-public class HealthSystem : MonoBehaviour {
+public class PlayerHP : MonoBehaviour, IHealthSystem {
     [SerializeField] private int _maxHealth = 5;
     [SerializeField] private int _currentHealth = 3;
-    [SerializeField] private HealthUI healthUI;
-
-    void Start() {
-        healthUI.UpdateHearts(CurrentHealth);
-    }
+    private HealthUI healthUI;
 
     public int MaxHealth { 
         get { return _maxHealth; }
@@ -19,15 +15,28 @@ public class HealthSystem : MonoBehaviour {
         set { _currentHealth = Mathf.Clamp(value, 0, _maxHealth); }
     }
 
+    void Awake() {
+        healthUI = FindObjectOfType<HealthUI>();
+    }
+
+    void Start() {
+        if (healthUI != null) {
+            healthUI.UpdateHearts(_currentHealth);
+        } else {
+            Debug.Log("Erro ao encontrar a UI de HP do Player!");
+            return;
+        }
+    }
+
     public void Heal(int heal) {
-        CurrentHealth += heal;
-        healthUI.UpdateHearts(CurrentHealth);
+        _currentHealth += heal;
+        healthUI.UpdateHearts(_currentHealth);
     }
 
     public void TakeDamage(int damage) {
-        CurrentHealth -= damage;
-        healthUI.UpdateHearts(CurrentHealth);
-        CheckDead(CurrentHealth);
+        _currentHealth -= damage;
+        healthUI.UpdateHearts(_currentHealth);
+        CheckDead(_currentHealth);
     }
 
     private void CheckDead(int hp) {
