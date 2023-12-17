@@ -12,11 +12,9 @@ GameObject:
   - component: {fileID: 8131921203716286501}
   - component: {fileID: 9035348421846988493}
   - component: {fileID: 4263121564528471290}
-  - component: {fileID: 3279943810192696667}
+  - component: {fileID: 5623384172028685734}
   - component: {fileID: 374852512131257642}
   - component: {fileID: 8277455053263452519}
-  - component: {fileID: 7054200097425481519}
-  - component: {fileID: 6544702957888025142}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -37,6 +35,7 @@ Transform:
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 1
   m_Children:
+  - {fileID: 7929076988929896550}
   - {fileID: 7850168654566238772}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -154,7 +153,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0.095}
   m_Size: {x: 0.08, y: 0.19}
   m_Direction: 0
---- !u!58 &3279943810192696667
+--- !u!58 &5623384172028685734
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -229,13 +228,82 @@ MonoBehaviour:
     m_Bits: 192
   groundCheck: {fileID: 7850168654566238772}
   overlapRadius: 0.15
---- !u!114 &7054200097425481519
+--- !u!1 &3891046616973672812
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7929076988929896550}
+  - component: {fileID: 5774474669432674621}
+  - component: {fileID: 8288190586332230752}
+  - component: {fileID: 518742276239123038}
+  m_Layer: 0
+  m_Name: Body
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7929076988929896550
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3891046616973672812}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1071735114570147345}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!70 &5774474669432674621
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3891046616973672812}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.095}
+  m_Size: {x: 0.08, y: 0.19}
+  m_Direction: 0
+--- !u!114 &8288190586332230752
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1683580786951231144}
+  m_GameObject: {fileID: 3891046616973672812}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9e1df3a778c92ce45b972ef162156a0d, type: 3}
@@ -243,14 +311,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealth: 5
   _currentHealth: 3
-  healthUI: {fileID: 0}
---- !u!114 &6544702957888025142
+--- !u!114 &518742276239123038
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1683580786951231144}
+  m_GameObject: {fileID: 3891046616973672812}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c56880a5ba640124ba6e4a08db7b97bd, type: 3}
@@ -266,7 +333,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7850168654566238772}
   m_Layer: 0
-  m_Name: GroundCheck
+  m_Name: Feet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

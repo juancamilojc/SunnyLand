@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
@@ -6,20 +7,26 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] private LayerMask whatIsGround;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private float overlapRadius = 0.15f;
+
+    [SerializeField] private float kbForce = 6f;
+    public float kbCounter;
+    public float kbTotalTime = 0.3f;
+    public bool knockFromRight;
+
     private bool onGround;
     private Rigidbody2D rb;
     private bool facingRight = true;
     private bool jump = false;
     private Vector3 initialPosition;
     private float horizontalMove;
-
+    private SpriteRenderer sprite;
     private Animator playerAnimator;
-    private PlayerHP playerHP;
+    private bool blockInput = false;
 
     void Awake() {
         initialPosition = transform.position;
         playerAnimator = GetComponent<Animator>();
-        playerHP = GetComponent<PlayerHP>();
+        sprite = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -33,8 +40,10 @@ public class PlayerController : MonoBehaviour {
     }
 
     void FixedUpdate() {
-        Move(horizontalMove, onGround, jump);
-        jump = false;
+        if (!blockInput) {
+            Move(horizontalMove, onGround, jump);
+            jump = false;
+        }
     }
 
     private void Move(float move, bool grounded, bool jump) {
@@ -54,7 +63,12 @@ public class PlayerController : MonoBehaviour {
     // Faz o Player olhar para o lado do movimento
     private void Flip() {
         facingRight = !facingRight;
-        transform.Rotate(0f, 180f, 0f);
+        
+        if (facingRight) {
+            sprite.flipX = false;
+        } else {
+            sprite.flipX = true;
+        }
     }
 
     // Valores para definir a Animação (idle, run, jump & fall)
@@ -64,14 +78,54 @@ public class PlayerController : MonoBehaviour {
         playerAnimator.SetBool("OnGround", grounded);
     }
 
-    private void ResetPosition() {
+    public void ResetPosition() {
         transform.position = initialPosition;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.gameObject.CompareTag("Void")) {
-            playerHP.TakeDamage(1);
-            ResetPosition();
+    private void OnEnable() {
+        PlayerHP.OnPlayerDead += PlayerDead;
+        PlayerHP.OnPlayerDamage += PlayerDamage;
+    }
+
+    private void OnDisable() {
+        PlayerHP.OnPlayerDead -= PlayerDead;
+        PlayerHP.OnPlayerDamage -= PlayerDamage;
+    }
+
+    private void PlayerDead() {
+        StartCoroutine(Dead());
+    }
+
+    private void PlayerDamage() {
+        StartCoroutine(KnockBack());
+    }
+
+    private IEnumerator KnockBack() {
+        playerAnimator.SetTrigger("TakeDamage");
+        blockInput = true;
+        kbCounter = kbTotalTime;
+
+        while (kbCounter > 0) {
+            if (knockFromRight) {
+                rb.velocity = new Vector2(-kbForce, kbForce);
+            } else if (!knockFromRight) {
+                rb.velocity = new Vector2(kbForce, kbForce);
+            }
+
+            kbCounter -= Time.deltaTime;
+            yield return null;
         }
+
+        rb.velocity = Vector2.zero;
+        blockInput = false;
+        
+    }
+
+    private IEnumerator Dead() {
+        blockInput = true;
+        ResetPosition();
+        rb.velocity = Vector2.zero;
+        yield return null;
+        this.enabled = false;
     }
 }

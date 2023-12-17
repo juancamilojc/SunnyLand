@@ -9,6 +9,7 @@ TagManager:
   - Cherry
   - Void
   - Plataform
+  - Damage1
   layers:
   - Default
   - TransparentFX

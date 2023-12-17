@@ -11,13 +11,14 @@ public class CollectionManager : MonoBehaviour {
     
     private int numCherrysCollected = 0;
     private int numGemsCollected = 0;
-    private PlayerHP playerHP;
+    private PlayerHP player;
 
     void Awake() {
-        playerHP = GameObject.FindWithTag("Player").GetComponent<PlayerHP>();
+        player = FindObjectOfType<PlayerHP>();
 
-        if (playerHP == null) {
+        if (player == null) {
             Debug.Log("Erro ao carregar o HP do Player!");
+            return;
         }
     }
 
@@ -34,9 +35,9 @@ public class CollectionManager : MonoBehaviour {
     private void CherryCollected() {
         numCherrysCollected++;
 
-        if (numCherrysCollected >= amountToCure && playerHP.CurrentHealth < playerHP.MaxHealth) {
+        if (numCherrysCollected >= amountToCure && player.CurrentHealth < player.MaxHealth) {
             numCherrysCollected -= amountToCure;
-            playerHP.Heal(amountHeal);
+            player.Heal(amountHeal);
         }
 
         cherryUI.text = numCherrysCollected.ToString();
