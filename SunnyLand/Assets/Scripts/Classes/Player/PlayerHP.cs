@@ -22,11 +22,9 @@ public class PlayerHP : MonoBehaviour, IHealthSystem {
     }
 
     void Awake() {
-        healthUI = FindObjectOfType<HealthUI>();
-        //player = FindObjectOfType<PlayerController>();
-        player = GetComponentInParent<PlayerController>();
         anim = GetComponentInParent<Animator>();
-        
+        healthUI = FindObjectOfType<HealthUI>();
+        player = GetComponentInParent<PlayerController>();
     }
 
     void Start() {
@@ -61,13 +59,14 @@ public class PlayerHP : MonoBehaviour, IHealthSystem {
 
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.CompareTag("Damage1")) {
-            player.kbCounter =player.kbTotalTime;
+            player.kbCounter = player.kbTotalTime;
+
             if (collision.transform.position.x  >= transform.position.x) {
                 player.knockFromRight = true;
             } else if (collision.transform.position.x < transform.position.x) {
                 player.knockFromRight = false;
             }
-            TakeDamage(1);
+            //TakeDamage(1);
             OnPlayerDamage?.Invoke();
         } else if (collision.CompareTag("Void")) {
             TakeDamage(1);

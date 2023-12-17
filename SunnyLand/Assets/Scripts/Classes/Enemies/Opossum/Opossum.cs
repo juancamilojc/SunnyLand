@@ -1,40 +1,21 @@
 using UnityEngine;
 
 public class Opossum : MonoBehaviour {
-    [SerializeField] private float moveSpeed = 1.5f;
-    [SerializeField] private Transform[] pointsToMove;
-    [SerializeField] private int startingPoint;
-    private SpriteRenderer sprite;
-    private Rigidbody2D rb;
+    [SerializeField] private int damage = 1;
+    private PlayerHP player;
 
     void Start() {
-        sprite = GetComponent<SpriteRenderer>();
-        rb = GetComponent<Rigidbody2D>();
+        player = FindAnyObjectByType<PlayerHP>();
 
-        transform.position = pointsToMove[startingPoint].position;
-    }
-
-    void Update() {
-        if (startingPoint == 0) {
-            sprite.flipX = true;
-        } else {
-            sprite.flipX = false;
+        if (player == null) {
+            Debug.Log("Erro ao encontrar o Player!");
+            return;
         }
     }
 
-    void FixedUpdate() {
-        Move();
-    }
-
-    private void Move() {
-        transform.position = Vector2.MoveTowards(transform.position, pointsToMove[startingPoint].transform.position, moveSpeed * Time.deltaTime);
-
-        if (transform.position == pointsToMove[startingPoint].transform.position) {
-            startingPoint += 1;
-        }
-
-        if (startingPoint == pointsToMove.Length) {
-            startingPoint = 0;
+    private void OnCollisionEnter2D(Collision2D collision) {
+        if (collision.gameObject.CompareTag("Player")) {
+            player.TakeDamage(damage);
         }
     }
 }

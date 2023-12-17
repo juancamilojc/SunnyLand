@@ -118,7 +118,6 @@ public class PlayerController : MonoBehaviour {
 
         rb.velocity = Vector2.zero;
         blockInput = false;
-        
     }
 
     private IEnumerator Dead() {
