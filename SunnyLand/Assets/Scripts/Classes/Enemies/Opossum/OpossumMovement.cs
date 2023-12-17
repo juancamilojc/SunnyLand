@@ -1,40 +1,61 @@
 using UnityEngine;
 
-public class OpossumMovement : MonoBehaviour {
+public class OpossumMovement : MonoBehaviour, IEnemyMovement {
     [SerializeField] private float moveSpeed = 1.5f;
     [SerializeField] private Transform[] patrolPoints;
     [SerializeField] private int patrolDestination;
-    private SpriteRenderer sprite;
-    private Rigidbody2D rb;
-
-    void Start() {
-        sprite = GetComponentInChildren<SpriteRenderer>();
-        rb = GetComponent<Rigidbody2D>();
-
-        transform.position = patrolPoints[patrolDestination].position;
-    }
+    
+    // Variáveis para o Chase
+    /* [SerializeField] private Transform player;
+    [SerializeField] private float chasingDistance = 2f;
+    private bool isChasing = false; */
+    private bool isMovementEnable = true;
 
     void Update() {
-        if (patrolDestination == 0) {
-            sprite.flipX = true;
+        // Tratamento se ativar o Chase
+        /* if (!isMovementEnable) {
+            return;
+        } else if (Vector2.Distance(transform.position, player.position) < chasingDistance) {
+            Chase();
         } else {
-            sprite.flipX = false;
+            Patrol();
+        } */
+
+        if (!isMovementEnable) {
+            return;
+        } else {
+            Patrol();
         }
     }
 
-    void FixedUpdate() {
-        Move();
+    public void Patrol() {
+        if (patrolDestination == 0) {
+            transform.position = Vector2.MoveTowards(transform.position, patrolPoints[0].position, moveSpeed * Time.deltaTime);
+            if (Vector2.Distance(transform.position, patrolPoints[0].position) < .2f) {
+                transform.localScale = new Vector3(1, 1, 1);
+                patrolDestination = 1;
+            }
+        } else if (patrolDestination == 1) {
+            transform.position = Vector2.MoveTowards(transform.position, patrolPoints[1].position, moveSpeed * Time.deltaTime);
+            if (Vector2.Distance(transform.position, patrolPoints[1].position) < .2f) {
+                transform.localScale = new Vector3(-1, 1, 1);
+                patrolDestination = 0;
+            }
+        }
     }
 
-    private void Move() {
-        transform.position = Vector2.MoveTowards(transform.position, patrolPoints[patrolDestination].transform.position, moveSpeed * Time.deltaTime);
-
-        if (transform.position == patrolPoints[patrolDestination].transform.position) {
-            patrolDestination += 1;
+    // Não deu tempo de refinar a perseguição :'(
+    /* public void Chase() {
+        if (transform.position.x > player.transform.position.x) {
+            transform.localScale = new Vector3(1, 1, 1);
+            transform.position += moveSpeed * Time.deltaTime * Vector3.left;
+        } else if (transform.position.x < player.transform.position.x) {
+            transform.localScale = new Vector3(-1, 1, 1);
+            transform.position += moveSpeed * Time.deltaTime * Vector3.right;
         }
+    } */
 
-        if (patrolDestination == patrolPoints.Length) {
-            patrolDestination = 0;
-        }
+    public void DisableMovement() {
+        isMovementEnable = false;
     }
 }

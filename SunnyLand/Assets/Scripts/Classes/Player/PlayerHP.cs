@@ -53,6 +53,7 @@ public class PlayerHP : MonoBehaviour, IHealthSystem {
             OnPlayerDead?.Invoke();
             Debug.Log("No céu tem pão? E morreu!");
             GetComponent<CapsuleCollider2D>().enabled = false;
+            anim.enabled = false;
             //this.enabled = false;
         }
     }

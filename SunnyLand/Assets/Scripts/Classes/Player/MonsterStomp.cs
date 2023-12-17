@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class MonsterStomp : MonoBehaviour {
@@ -8,7 +7,9 @@ public class MonsterStomp : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.CompareTag("WeakPoint")) {
             enemy = collision.gameObject;
-            enemy.GetComponent<OpossumMovement>().enabled = false;
+            IEnemyMovement enemyMovement = enemy.GetComponent<IEnemyMovement>();
+            enemyMovement?.DisableMovement();
+            //enemy.GetComponent<OpossumMovement>().enabled = false;
 
             StartCoroutine(KillEnemy());
         }
@@ -21,5 +22,6 @@ public class MonsterStomp : MonoBehaviour {
         enemy.transform.GetChild(1).gameObject.SetActive(true);
         yield return new WaitForSeconds(0.5f);
         Destroy(enemy);
+        Debug.Log("Inimigo Derrotado!");
     }
 }
