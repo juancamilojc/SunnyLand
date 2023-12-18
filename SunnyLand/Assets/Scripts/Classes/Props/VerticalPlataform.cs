@@ -30,7 +30,7 @@ public class VerticalPlataform : MonoBehaviour, IMovingPlataform {
         if (collision.gameObject.CompareTag("Player")) {
             collision.gameObject.transform.SetParent(transform);
             collision.gameObject.GetComponent<Rigidbody2D>().gravityScale = 10;
-            Debug.Log("Pisou na Plataforma!");
+            //Debug.Log("Pisou na Plataforma!");
         }
     }
 
@@ -39,7 +39,7 @@ public class VerticalPlataform : MonoBehaviour, IMovingPlataform {
         if (collision.gameObject.CompareTag("Player")) {
             collision.gameObject.transform.SetParent(null);
             collision.gameObject.GetComponent<Rigidbody2D>().gravityScale = 3;
-            Debug.Log("Saiu da Plataforma!");
+            //Debug.Log("Saiu da Plataforma!");
         }
     }
 }

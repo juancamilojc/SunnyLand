@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -7,6 +8,8 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] private LayerMask whatIsGround;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private float overlapRadius = 0.15f;
+
+    [SerializeField] private PlayerHP playerHP;
 
     [SerializeField] private float kbForce = 6f;
     public float kbCounter;
@@ -26,16 +29,27 @@ public class PlayerController : MonoBehaviour {
     void Awake() {
         initialPosition = transform.position;
         playerAnimator = GetComponent<Animator>();
+        playerHP = GetComponentInChildren<PlayerHP>();
         sprite = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
     }
 
     void Update() {
-        horizontalMove = Input.GetAxis("Horizontal") * moveSpeed;
-        onGround = Physics2D.OverlapCircle(groundCheck.position, overlapRadius, whatIsGround);
+        if (!blockInput) {
+            horizontalMove = Input.GetAxis("Horizontal") * moveSpeed;
+            onGround = Physics2D.OverlapCircle(groundCheck.position, overlapRadius, whatIsGround);
 
-        if (Input.GetButtonDown("Jump")) {
-            jump = true;
+            if (Input.GetButtonDown("Jump")) {
+                jump = true;
+            }
+        } else {
+            horizontalMove = 0f;
+            rb.velocity = Vector2.zero;
+            rb.gravityScale = 10;
+            jump = false;
+
+            HandlerAnimation(0, 0, false);
+            Debug.Log("Input Blockeado!");
         }
     }
 
@@ -80,6 +94,7 @@ public class PlayerController : MonoBehaviour {
 
     public void ResetPosition() {
         transform.position = initialPosition;
+        rb.velocity = Vector2.zero;
     }
 
     private void OnEnable() {
@@ -122,9 +137,7 @@ public class PlayerController : MonoBehaviour {
 
     private IEnumerator Dead() {
         blockInput = true;
+        yield return new WaitForSeconds(0.1f);
         ResetPosition();
-        rb.velocity = Vector2.zero;
-        yield return null;
-        this.enabled = false;
     }
 }

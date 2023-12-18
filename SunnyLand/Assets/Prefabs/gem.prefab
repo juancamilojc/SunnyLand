@@ -19,7 +19,7 @@ GameObject:
   m_TagString: Gem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &1854819338852052211
 Transform:
@@ -187,7 +187,7 @@ MonoBehaviour:
   - {x: 0.0056612045, y: -0.055019382, z: 0}
   m_ShapePathHash: 1448938915
   m_Mesh: {fileID: 0}
-  m_InstanceId: 54922
+  m_InstanceId: 131218
   m_LocalBounds:
     m_Center: {x: -0.00028133392, y: 0.0007879175, z: 0}
     m_Extent: {x: 0.06644974, y: 0.0558073, z: 0}
@@ -206,7 +206,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &5897534592000840131
 Transform:

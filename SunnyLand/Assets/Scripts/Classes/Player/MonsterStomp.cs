@@ -9,7 +9,6 @@ public class MonsterStomp : MonoBehaviour {
             enemy = collision.gameObject;
             IEnemyMovement enemyMovement = enemy.GetComponent<IEnemyMovement>();
             enemyMovement?.DisableMovement();
-            //enemy.GetComponent<OpossumMovement>().enabled = false;
 
             StartCoroutine(KillEnemy());
         }
@@ -18,6 +17,7 @@ public class MonsterStomp : MonoBehaviour {
     private IEnumerator KillEnemy() {
         enemy.transform.GetChild(0).gameObject.SetActive(false);
         enemy.GetComponent<BoxCollider2D>().enabled = false;
+        enemy.GetComponent<Rigidbody2D>().isKinematic = true;
 
         enemy.transform.GetChild(1).gameObject.SetActive(true);
         yield return new WaitForSeconds(0.5f);
