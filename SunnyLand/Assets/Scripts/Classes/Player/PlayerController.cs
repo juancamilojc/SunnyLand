@@ -137,7 +137,7 @@ public class PlayerController : MonoBehaviour {
 
     private IEnumerator Dead() {
         blockInput = true;
-        yield return new WaitForSeconds(0.1f);
         ResetPosition();
+        yield return null;
     }
 }

@@ -23,7 +23,7 @@ public class NextLevel : MonoBehaviour {
     }
 
     private IEnumerator NextLevelLoader() {
-        yield return new WaitForSeconds(0.1f);
         levelLoader.LoadNextLevel();
+        yield return null;
     }    
 }
