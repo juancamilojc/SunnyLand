@@ -10,7 +10,7 @@ public class ActivatorPortal : MonoBehaviour {
     void Start() {
         portalAnim = GetComponent<Animator>();
         player = FindObjectOfType<PlayerController>().transform;
-        portal = GetComponentInChildren<NextLevel>().transform;
+        //portal = GetComponentInChildren<NextLevel>().transform;
 
         if (portalAnim == null || portal == null || player == null) {
             Debug.Log("Erro ao obter objetos para o funcionamento correto do Portal!");

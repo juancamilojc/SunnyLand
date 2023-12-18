@@ -45,7 +45,6 @@ public class PlayerController : MonoBehaviour {
         } else {
             horizontalMove = 0f;
             rb.velocity = Vector2.zero;
-            rb.gravityScale = 10;
             jump = false;
 
             HandlerAnimation(0, 0, false);

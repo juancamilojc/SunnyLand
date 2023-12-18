@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class GameOverScreenManager : MonoBehaviour {
+public class FinalScreenManager : MonoBehaviour {
     [SerializeField] private GameObject gameOverScreen;
 
     private void OnEnable() {
-        PlayerHP.OnPlayerDead += EnableGameOverScreen;
+        FinalPoint.OnFinalGame += EnableGameOverScreen;
     }
 
     private void EnableGameOverScreen() {
