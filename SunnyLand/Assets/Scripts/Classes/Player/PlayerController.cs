@@ -139,4 +139,9 @@ public class PlayerController : MonoBehaviour {
         ResetPosition();
         yield return null;
     }
+
+    private void OnDrawGizmos() {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(groundCheck.position, overlapRadius);
+    }
 }
