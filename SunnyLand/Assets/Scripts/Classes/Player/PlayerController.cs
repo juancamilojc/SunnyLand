@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour {
 
     private bool onGround;
     private Rigidbody2D rb;
-    private bool facingRight = true;
+    private bool direction = true;
     private bool jump = false;
     private Vector3 initialPosition;
     private float horizontalMove;
@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour {
     private void Move(float move, bool grounded, bool jump) {
         rb.velocity = new Vector2(move * 100f * Time.fixedDeltaTime, rb.velocity.y);
 
-        if ((move < 0 && facingRight) || (move > 0 && !facingRight)) {
+        if ((move < 0 && direction) || (move > 0 && !direction)) {
             Flip();
         }
 
@@ -75,9 +75,9 @@ public class PlayerController : MonoBehaviour {
 
     // Faz o Player olhar para o lado do movimento
     private void Flip() {
-        facingRight = !facingRight;
+        direction = !direction;
         
-        if (facingRight) {
+        if (direction) {
             sprite.flipX = false;
         } else {
             sprite.flipX = true;
